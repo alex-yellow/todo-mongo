@@ -3,12 +3,32 @@
 <table>
     <thead>
         <th>Task</th>
+        <th></th>
+        <th></th>
+        <th></th>
     </thead>
     <tbody>
         {{#each tasks}}
         <tr>
-            <td>{{title}}</td>
+            {{#if completed}}
+                <td style="text-decoration: line-through;">{{title}}</td>
+            {{else}}
+                <td>{{title}}</td>
+            {{/if}}
+            <td><a href="/tasks/{{_id}}">Show</a></td>
+            <td><a href="/edit/{{_id}}">Edit</a></td>
+            <td>
+                <form action="/delete" method="post">
+                    <input type="hidden" name="id" value="{{_id}}">
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
         </tr>
         {{/each}}
     </tbody>
 </table>
+<div class="add">{{{add}}}</div>
+<div class="edit">{{edit}}</div>
+<div class="delete">{{delete}}</div>
+
+<h3><a href="/add">Add task</a></h3>
